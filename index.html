@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MiixiviD - 全平台音樂收聽</title>
+  <style>
+   /* 設定雪花容器，讓它懸浮在視窗最上層，且不影響點擊 */
+  .snow-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* 關鍵！讓滑鼠可以穿透雪花點擊後面的按鈕 */
+    z-index: 9999; /* 確保雪花在最上層 */
+  }
+
+  /* 雪花的基本樣式 */
+  .snowflake {
+    position: absolute;
+    top: -10%;
+    color: #FFF; /* 雪花顏色，如果是淺色背景可改為 #ddf */
+    font-size: 1.5em;
+    font-family: Arial, sans-serif;
+    text-shadow: 0 0 5px #000; /* 加一點陰影讓它在白背景也能看見，可自行移除 */
+    animation-name: fall, shake;
+    animation-duration: 10s, 3s;
+    animation-timing-function: linear, ease-in-out;
+    animation-iteration-count: infinite, infinite;
+  }
+  
+  /* 定義落下動畫 */
+  @keyframes fall {
+    0% { top: -10%; }
+    100% { top: 100%; }
+  }
+  
+  /* 定義左右搖擺動畫 */
+  @keyframes shake {
+     0% { transform: translateX(0px); }
+     50% { transform: translateX(80px); } /* 搖擺幅度 */
+     100% { transform: translateX(0px); }
+  }
+  
+  /* --- 隨機化區段 --- */
+  /* 這裡利用 nth-child 讓每片雪花的位置、大小、速度都不一樣 */
+  
+  .snowflake:nth-child(1) { left: 1%; animation-delay: 0s, 0s; }
+  .snowflake:nth-child(2) { left: 10%; animation-delay: 1s, 1s; font-size: 2em; }
+  .snowflake:nth-child(3) { left: 20%; animation-delay: 6s, 0.5s; }
+  .snowflake:nth-child(4) { left: 30%; animation-delay: 4s, 2s; font-size: 1.2em;}
+  .snowflake:nth-child(5) { left: 40%; animation-delay: 2s, 2s; }
+  .snowflake:nth-child(6) { left: 50%; animation-delay: 8s, 3s; font-size: 2.5em;}
+  .snowflake:nth-child(7) { left: 60%; animation-delay: 6s, 2s; }
+  .snowflake:nth-child(8) { left: 70%; animation-delay: 2.5s, 1s; font-size: 1.8em;}
+  .snowflake:nth-child(9) { left: 80%; animation-delay: 1s, 0s; }
+  .snowflake:nth-child(10) { left: 90%; animation-delay: 3s, 1.5s; }
+ 
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      color: #fff;
+      text-align: center;
+      padding: 40px 20px;
+      margin: 0;
+    }
+    
+    .profile-img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #bd00ff;
+      box-shadow: 0 0 20px rgba(255, 92, 138, 0.4);
+      margin-bottom: 15px;
+    }
+
+    h1 {
+      margin: 10px 0;
+      font-size: 1.8rem;
+      letter-spacing: 1px;
+    }
+    
+    p {
+      color: #ccc;
+      margin-bottom: 30px;
+      font-size: 0.95rem;
+    }
+
+    .container {
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    /* --- 雙欄佈局核心設定 --- */
+    .split-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .column-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+      padding-bottom: 5px;
+      border-bottom: 2px solid rgba(255,255,255,0.1);
+    }
+
+    /* 針對 MiiD 的標題色 */
+    .miid-title { color: #ff5c8a; border-color: #ff5c8a; }
+    /* 針對 Xivid 的標題色 */
+    .xivid-title { color: #00d2ff; border-color: #00d2ff; }
+
+    /* 按鈕基礎樣式 */
+    a.btn {
+      display: block;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(5px);
+      color: #fff;
+      text-decoration: none;
+      padding: 12px;
+      margin: 8px 0;
+      border-radius: 50px;
+      border: 1px solid rgba(255,255,255,0.2);
+      transition: all 0.3s ease;
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+    
+    /* MiiD 區塊按鈕 (預設粉紅) */
+    .col:not(.xivid-col) a.btn:hover {
+      background: #ff5c8a;
+      border-color: #ff5c8a;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(255, 92, 138, 0.4);
+    }
+
+    /* Xivid 區塊按鈕 (青藍色) */
+    .xivid-col a.btn:hover {
+      background: #00d2ff;
+      border-color: #00d2ff;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 210, 255, 0.4);
+    }
+
+    /* 共用區塊按鈕 (霓虹紫) --- */
+    .shared-links a.btn:not(.donate-btn):hover {
+      background: #bd00ff; /* 融合的紫色 */
+      border-color: #bd00ff;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(189, 0, 255, 0.4);
+    }
+
+    /* 全寬按鈕 (共用連結) */
+    .full-width-btn {
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    /* 特別贊助按鈕 (維持金色) */
+    .donate-btn {
+      background: linear-gradient(90deg, #FFD700, #FFA500) !important;
+      color: #000 !important;
+      border: none !important;
+      animation: pulse 2s infinite;
+      margin-top: 20px !important;
+    }
+    
+    .donate-btn:hover {
+      box-shadow: 0 5px 20px rgba(255, 215, 0, 0.6) !important;
+      background: linear-gradient(90deg, #FFA500, #FFD700) !important;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+      100% { transform: scale(1); }
+    }
+
+    footer {
+      margin-top: 50px;
+      font-size: 0.8rem;
+      color: #888;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+  <div class="snow-container" aria-hidden="true">
+   <div class="snowflake">❅</div>
+   <div class="snowflake">❅</div>
+   <div class="snowflake">❆</div>
+   <div class="snowflake">❄</div>
+   <div class="snowflake">❅</div>
+   <div class="snowflake">❆</div>
+   <div class="snowflake">❄</div>
+   <div class="snowflake">❅</div>
+   <div class="snowflake">❆</div>
+   <div class="snowflake">❄</div>
+  </div>
+  <img src="profile.jpg" alt="MiiD Profile" class="profile-img">
+  <h1>MiixiviD</h1>
+  <p>🎶Just enjoy the beats~</p>
+
+  <div class="container">
+    
+    <div class="split-layout">
+      
+      <div class="col">
+        <div class="column-title miid-title">MiiD</div>
+        <a href="https://open.spotify.com/artist/5Rt6DsgbJec4yOqawqIvPc" target="_blank" class="btn">Spotify</a>
+        <a href="https://music.apple.com/tw/artist/miid/1826549990" target="_blank" class="btn">Apple Music</a>
+        <a href="https://www.kkbox.com/tw/tc/artist/PXTvknGYLmWjh2adnB" target="_blank" class="btn">KKBOX</a>
+        <a href="https://music-tw.line.me/artist/2475008" target="_blank" class="btn">Line Music</a>
+        <a href="https://music.youtube.com/channel/UCzwAfi83bklEHP91K2L4CVw" target="_blank" class="btn">YouTube Music</a>
+        <a href="http://www.youtube.com/@MiiDthenobody" target="_blank" class="btn">YouTube Channel</a>
+      </div>
+
+      <div class="col xivid-col">
+        <div class="column-title xivid-title">Xivid</div>
+        <a href="https://open.spotify.com/artist/4sriMJGbNNetzk6h0YS84e" target="_blank" class="btn">Spotify</a>
+        <a href="https://music.apple.com/tw/artist/xivid/1861511246" target="_blank" class="btn">Apple Music</a>
+        <a href="https://www.amazon.com/music/player/artists/B0G761W3YZ/xivid" target="_blank" class="btn">Amazon</a>
+        <a href="https://tidal.com/artist/71442405" target="_blank" class="btn">TIDAL</a>
+        <a href="https://music.youtube.com/channel/UCn211qTBmlZzL2HbBAFLIKw" target="_blank" class="btn">YouTube Music</a>
+        <a href="http://www.youtube.com/@xividinthemist" target="_blank" class="btn">YouTube Channel</a>
+      </div>
+
+    </div>
+
+    <div class="shared-links">
+      <a href="https://streetvoice.com/miidthenobody" target="_blank" class="btn full-width-btn">StreetVoice</a>
+      <a href="https://www.facebook.com/MiiDthenobody/" target="_blank" class="btn full-width-btn">Facebook</a>
+      
+      <a href="https://paypal.me/MiiDXivid" target="_blank" class="btn full-width-btn donate-btn">☕ Buy me a coffee</a>
+    </div>
+
+  </div>
+
+  <footer>
+    © 2025 MiixiviD | All Rights Reserved
+  </footer>
+</body>
+</html>
