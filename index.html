@@ -51,10 +51,22 @@
     .links { display:flex; flex-wrap:wrap; gap:9px; }
     .link { display:inline-flex; align-items:center; gap:7px; padding:9px 13px; text-decoration:none; font-size:14px; border:1px solid rgba(184,152,89,.3); border-radius:999px; color:#d8c9b6; transition:.2s ease; }
     .link:hover,.link:focus-visible { color:#fff; border-color:var(--gold); background:rgba(184,152,89,.1); transform:translateY(-2px); outline:none; }
-    .portal { display:grid; min-height:340px; place-items:center; text-align:center; padding:44px; border:1px solid var(--line); border-radius:24px; background:linear-gradient(135deg,rgba(143,29,44,.2),rgba(103,68,140,.19)); }
-    .portal .link { font-size:16px; padding:14px 22px; }
+    .platform-columns { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; margin-top:34px; }
+    .platform-group { padding:28px; border:1px solid var(--line); border-radius:20px; background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018)); }
+    .platform-group.xivid { border-color:rgba(103,68,140,.36); }
+    .platform-group.shared { grid-column:1/-1; border-color:rgba(184,152,89,.3); }
+    .platform-title { margin:0 0 18px; padding-bottom:12px; font:700 22px "Playfair Display","Noto Serif TC",serif; border-bottom:1px solid rgba(143,29,44,.45); }
+    .xivid .platform-title { border-color:rgba(103,68,140,.65); }
+    .shared .platform-title { border-color:rgba(184,152,89,.45); }
+    .platform-links { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+    .platform-button { display:flex; min-height:46px; align-items:center; justify-content:center; padding:10px 13px; text-align:center; text-decoration:none; color:#d8c9b6; border:1px solid rgba(143,29,44,.42); border-radius:13px; background:rgba(20,0,0,.3); transition:.22s ease; }
+    .xivid .platform-button { border-color:rgba(103,68,140,.55); background:rgba(32,18,45,.26); }
+    .shared .platform-button { border-color:rgba(184,152,89,.36); background:rgba(184,152,89,.07); }
+    .platform-button:hover,.platform-button:focus-visible { color:#fff; border-color:var(--gold); background:rgba(184,152,89,.12); transform:translateY(-2px); outline:none; box-shadow:0 8px 20px rgba(0,0,0,.22); }
+    .platform-button.support { background:linear-gradient(135deg,rgba(143,29,44,.5),rgba(103,68,140,.45)); }
     footer { padding:28px 18px 42px; text-align:center; color:#665d5b; font-size:13px; }
-    @media (max-width:700px) { .hero { min-height:340px; } .hero-content { padding-bottom:112px; } .nav { grid-template-columns:repeat(2,1fr); } .nav-wrap { margin-top:-104px; } main { padding-top:92px; } .about { grid-template-columns:1fr; text-align:center; } .portrait { width:170px; margin:auto; } .lead { margin-inline:auto; } .cards { grid-template-columns:1fr; } }
+    @media (max-width:700px) { .hero { min-height:340px; } .hero-content { padding-bottom:112px; } .nav { grid-template-columns:repeat(2,1fr); } .nav-wrap { margin-top:-104px; } main { padding-top:92px; } .about { grid-template-columns:1fr; text-align:center; } .portrait { width:170px; margin:auto; } .lead { margin-inline:auto; } .cards,.platform-columns { grid-template-columns:1fr; } .platform-group.shared { grid-column:auto; } }
+    @media (max-width:440px) { .platform-links { grid-template-columns:1fr; } }
     @media (prefers-reduced-motion:reduce) { * { scroll-behavior:auto!important; animation:none!important; transition:none!important; } }
   </style>
 </head>
@@ -110,7 +122,41 @@
       </div>
     </section>
     <section id="links" class="panel" aria-labelledby="links-title">
-      <div class="portal"><div><span class="eyebrow">All platforms</span><h2 id="links-title">各平台快速連結</h2><p class="lead">前往原本的入口網站，一次查看所有音樂平台、社群與支持方式。</p><a class="link" href="0.html">開啟 MiixiviD 入口網站 →</a></div></div>
+      <span class="eyebrow">All platforms</span><h2 id="links-title">各平台快速連結</h2><p class="lead">選擇創作名義與平台，直接前往收聽、閱讀或追蹤最新作品。</p>
+      <div class="platform-columns">
+        <section class="platform-group" aria-labelledby="miid-platforms">
+          <h3 id="miid-platforms" class="platform-title">MiiD</h3>
+          <div class="platform-links">
+            <a class="platform-button" href="https://open.spotify.com/artist/5Rt6DsgbJec4yOqawqIvPc" target="_blank" rel="noopener noreferrer">Spotify</a>
+            <a class="platform-button" href="https://music.apple.com/tw/artist/miid/1826549990" target="_blank" rel="noopener noreferrer">Apple Music</a>
+            <a class="platform-button" href="https://www.kkbox.com/tw/tc/artist/PXTvknGYLmWjh2adnB" target="_blank" rel="noopener noreferrer">KKBOX</a>
+            <a class="platform-button" href="https://music-tw.line.me/artist/2475008" target="_blank" rel="noopener noreferrer">Line Music</a>
+            <a class="platform-button" href="https://music.youtube.com/channel/UCzwAfi83bklEHP91K2L4CVw" target="_blank" rel="noopener noreferrer">YouTube Music</a>
+            <a class="platform-button" href="https://www.youtube.com/@MiiDthenobody" target="_blank" rel="noopener noreferrer">YouTube Channel</a>
+          </div>
+        </section>
+        <section class="platform-group xivid" aria-labelledby="xivid-platforms">
+          <h3 id="xivid-platforms" class="platform-title">Xivid</h3>
+          <div class="platform-links">
+            <a class="platform-button" href="https://open.spotify.com/artist/4sriMJGbNNetzk6h0YS84e" target="_blank" rel="noopener noreferrer">Spotify</a>
+            <a class="platform-button" href="https://music.apple.com/tw/artist/xivid/1861511246" target="_blank" rel="noopener noreferrer">Apple Music</a>
+            <a class="platform-button" href="https://www.amazon.com/music/player/artists/B0G761W3YZ/xivid" target="_blank" rel="noopener noreferrer">Amazon</a>
+            <a class="platform-button" href="https://tidal.com/artist/71442405" target="_blank" rel="noopener noreferrer">TIDAL</a>
+            <a class="platform-button" href="https://music.youtube.com/channel/UCn211qTBmlZzL2HbBAFLIKw" target="_blank" rel="noopener noreferrer">YouTube Music</a>
+            <a class="platform-button" href="https://www.youtube.com/@xividinthemist" target="_blank" rel="noopener noreferrer">YouTube Channel</a>
+          </div>
+        </section>
+        <section class="platform-group shared" aria-labelledby="shared-platforms">
+          <h3 id="shared-platforms" class="platform-title">更多創作與社群</h3>
+          <div class="platform-links">
+            <a class="platform-button" href="https://streetvoice.com/miidthenobody" target="_blank" rel="noopener noreferrer">StreetVoice</a>
+            <a class="platform-button" href="https://www.facebook.com/MiiDthenobody/" target="_blank" rel="noopener noreferrer">Facebook</a>
+            <a class="platform-button" href="https://www.bookwalker.com.tw/search?v=1297" target="_blank" rel="noopener noreferrer">BOOK☆WALKER</a>
+            <a class="platform-button" href="https://www.patreon.com/collection/2079548?view=expanded" target="_blank" rel="noopener noreferrer">2026 新手 AI 音樂製作指南</a>
+            <a class="platform-button support" href="https://www.patreon.com/MiixiviD/posts/buy-me-coffee-wo-162365147" target="_blank" rel="noopener noreferrer">☕ Buy me a coffee</a>
+          </div>
+        </section>
+      </div>
     </section>
   </main>
   <footer>© 2026 MiixiviD · All Rights Reserved</footer>
@@ -172,6 +218,7 @@
     document.addEventListener('pointerdown',event=>{
       if(!event.target.closest('.member-name')) resetPortrait();
     });
+
   </script>
 </body>
 </html>
