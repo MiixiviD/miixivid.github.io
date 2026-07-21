@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="zh-Hant"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MiixiviD - 全平台音樂收聽</title>
+  <meta property="og:title" content="MiixiviD | 音樂創作" />
+  <meta property="og:description" content="點擊這裡收聽 MiixiviD 的最新音樂創作與相關連結。" />
+  <meta property="og:image" content="ent="https://miixivid.github.io/cover_2.png?v=20260703" />
+  <meta property="og:url" content="https://miixivid.github.io/" />
+  <meta property="og:type" content="website" />
+
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Eczar:wght@400;500;700&amp;family=Playfair+Display:wght@400;700;900&amp;display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+        body { font-family: 'Eczar', serif; }
+        h1, .column-title { font-family: 'Playfair Display', serif; }
+
+        .particle-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 9999;
+        }
+        .particle {
+            position: absolute; bottom: -5%;
+            width: 3px; height: 3px; border-radius: 50%;
+            background: #8b0000; opacity: 0.6;
+            animation: rise 8s linear infinite, drift 4s ease-in-out infinite;
+        }
+        @keyframes rise { 0% { bottom: -5%; opacity: 0.6; } 100% { bottom: 105%; opacity: 0; } }
+        @keyframes drift { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(30px); } }
+        .particle:nth-child(1) { left: 5%; animation-delay: 0s; }
+        .particle:nth-child(2) { left: 15%; animation-delay: 2s; width: 2px; height: 2px; }
+        .particle:nth-child(3) { left: 25%; animation-delay: 4s; }
+        .particle:nth-child(4) { left: 35%; animation-delay: 1s; width: 4px; height: 4px; }
+        .particle:nth-child(5) { left: 50%; animation-delay: 3s; }
+        .particle:nth-child(6) { left: 65%; animation-delay: 5s; width: 2px; height: 2px; }
+        .particle:nth-child(7) { left: 75%; animation-delay: 2.5s; }
+        .particle:nth-child(8) { left: 85%; animation-delay: 6s; width: 4px; height: 4px; }
+        .particle:nth-child(9) { left: 92%; animation-delay: 1.5s; }
+
+        .gothic-btn {
+            display: block; text-decoration: none; padding: 12px;
+            margin: 8px 0; border-radius: 24px;
+            border: 1px solid rgba(139, 0, 0, 0.4);
+            background: rgba(20, 0, 0, 0.6);
+            color: #d4c4a8; font-weight: 500; font-size: 0.9rem;
+            transition: all 0.3s ease; text-align: center;
+            font-family: 'Eczar', serif;
+        }
+        .gothic-btn:hover {
+            background: rgba(139, 0, 0, 0.3);
+            border-color: #8b0000;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(139, 0, 0, 0.4);
+        }
+        .col .gothic-btn {
+            border-color: rgba(139, 0, 0, 0.6);
+        }
+        .xivid-col .gothic-btn {
+            border-color: rgba(75, 0, 130, 0.6);
+        }
+        .xivid-col .gothic-btn:hover {
+            background: rgba(75, 0, 130, 0.3);
+            border-color: #4b0082;
+            box-shadow: 0 4px 20px rgba(75, 0, 130, 0.4);
+        }
+        .shared-links .gothic-btn {
+            border-color: rgba(184, 134, 11, 0.5);
+            background: rgba(184, 134, 11, 0.15);
+        }
+        .shared-links .gothic-btn:hover {
+            background: rgba(184, 134, 11, 0.25);
+            border-color: #b8860b;
+            box-shadow: 0 4px 20px rgba(184, 134, 11, 0.3);
+        }
+        .donate-btn {
+            background: linear-gradient(90deg, #8b0000, #4b0082) !important;
+            color: #d4c4a8 !important; border: 1px solid #8b0000 !important;
+            animation: pulse 3s infinite;
+        }
+        .donate-btn:hover {
+            box-shadow: 0 5px 25px rgba(139, 0, 0, 0.6) !important;
+        }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.015); } }
+
+        .profile-img {
+            width: 130px; height: 130px; border-radius: 50%; object-fit: cover;
+            border: 3px solid #8b0000;
+            box-shadow: 0 0 30px rgba(139, 0, 0, 0.5), 0 0 60px rgba(75, 0, 130, 0.2);
+        }
+        .ornament { color: #8b0000; opacity: 0.7; }
+
+        .profile-link {
+        display: block;
+        width: fit-content;
+        margin: 0 auto 1.5rem;
+        line-height: 0;
+        }
+
+        .profile-img {
+        display: block;
+        }
+    </style>
+ </head>
+
+ <body class="w-full min-h-screen text-center py-10 px-5" style="background: linear-gradient(rgb(10, 10, 10), rgb(26, 10, 10), rgb(13, 13, 26));">
+  <div class="particle-container" aria-hidden="true">
+   <div class="particle"></div>
+   <div class="particle"></div>
+   <div class="particle"></div>
+   <div class="particle"></div>
+   <div class="particle"></div>
+   <div class="particle"></div>
+   <div class="particle"></div>
+   <div class="particle"></div>
+   <div class="particle"></div>
+  </div>
+
+  <main class="max-w-lg mx-auto">
+   <a href="https://portaly.cc/MiixiviD" target="_blank" class="profile-link">
+    <img class="profile-img" loading="lazy" src="profile.jpg" alt="MiixiviD Music">
+   </a>
+    
+   <p class="ornament text-2xl mb-1">☩</p>
+   <h1 class="text-4xl font-black tracking-wider mb-2" style="color: rgb(212, 196, 168); font-weight: 900; font-style: normal; font-size: 32px;">MiixiviD</h1>
+   <p class="text-sm mb-8 opacity-80" style="color: rgb(138, 122, 106); font-weight: 400; font-style: normal; font-size: 16px;">🎶 Just enjoy the beats~</p>
+
+   <div class="grid grid-cols-2 gap-4 mb-6">
+
+    <div class="col">
+     <div class="text-lg font-bold mb-3 pb-2 border-b border-red-900" style="color: rgb(139, 0, 0); font-weight: 700; font-style: normal; font-size: 16px;">MiiD</div>
+      <a href="https://open.spotify.com/artist/5Rt6DsgbJec4yOqawqIvPc" target="_blank" rel="noopener noreferrer" class="gothic-btn">Spotify</a> 
+      <a href="https://music.apple.com/tw/artist/miid/1826549990" target="_blank" rel="noopener noreferrer" class="gothic-btn">Apple Music</a> 
+      <a href="https://www.kkbox.com/tw/tc/artist/PXTvknGYLmWjh2adnB" target="_blank" rel="noopener noreferrer" class="gothic-btn">KKBOX</a>
+      <a href="https://music-tw.line.me/artist/2475008" target="_blank" rel="noopener noreferrer" class="gothic-btn">Line Music</a>
+      <a href="https://music.youtube.com/channel/UCzwAfi83bklEHP91K2L4CVw" target="_blank" rel="noopener noreferrer" class="gothic-btn">YouTube Music</a>
+      <a href="https://www.youtube.com/@MiiDthenobody" target="_blank" rel="noopener noreferrer" class="gothic-btn">YouTube Channel</a>
+    </div>
+
+    <div class="col xivid-col">
+     <div class="text-lg font-bold mb-3 pb-2 border-b border-purple-900" style="color: rgb(75, 0, 130); font-weight: 700; font-style: normal; font-size: 16px;">Xivid</div>
+      <a href="https://open.spotify.com/artist/4sriMJGbNNetzk6h0YS84e" target="_blank" rel="noopener noreferrer" class="gothic-btn">Spotify</a>
+      <a href="https://music.apple.com/tw/artist/xivid/1861511246" target="_blank" rel="noopener noreferrer" class="gothic-btn">Apple Music</a>
+      <a href="https://www.amazon.com/music/player/artists/B0G761W3YZ/xivid" target="_blank" rel="noopener noreferrer" class="gothic-btn">Amazon</a>
+      <a href="https://tidal.com/artist/71442405" target="_blank" rel="noopener noreferrer" class="gothic-btn">TIDAL</a>
+      <a href="https://music.youtube.com/channel/UCn211qTBmlZzL2HbBAFLIKw" target="_blank" rel="noopener noreferrer" class="gothic-btn">YouTube Music</a>
+      <a href="https://www.youtube.com/@xividinthemist" target="_blank" rel="noopener noreferrer" class="gothic-btn">YouTube Channel</a>
+    </div>
+
+   </div>
+
+   <div class="shared-links">
+    <a href="https://streetvoice.com/miidthenobody" target="_blank" rel="noopener noreferrer" class="gothic-btn">StreetVoice</a>
+    <a href="https://www.facebook.com/MiiDthenobody/" target="_blank" rel="noopener noreferrer" class="gothic-btn">Facebook</a>
+    <a href="https://www.bookwalker.com.tw/search?v=1297" target="_blank" rel="noopener noreferrer" class="gothic-btn">BOOK☆WALKER</a>
+    <a href="https://www.patreon.com/collection/2079548?view=expanded" target="_blank" rel="noopener noreferrer" class="gothic-btn">2026 新手AI音樂製作指南</a>
+    <a href="https://www.patreon.com/MiixiviD/posts/buy-me-coffee-wo-162365147" target="_blank" rel="noopener noreferrer" class="gothic-btn donate-btn">☕ Buy me a coffee</a>
+   </div>
+  </main>
+  <footer class="mt-12 text-xs opacity-50" style="color: rgb(85, 85, 85); font-weight: 400; font-style: normal; font-size: 16px;">© 2026 MiixiviD | All Rights Reserved</footer>
+ </html>

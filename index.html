@@ -1,161 +1,177 @@
 <!doctype html>
-<html lang="zh-Hant"><head>
+<html lang="zh-Hant">
+<head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MiixiviD - 全平台音樂收聽</title>
-  <meta property="og:title" content="MiixiviD | 音樂創作" />
-  <meta property="og:description" content="點擊這裡收聽 MiixiviD 的最新音樂創作與相關連結。" />
-  <meta property="og:image" content="ent="https://miixivid.github.io/cover_2.png?v=20260703" />
-  <meta property="og:url" content="https://miixivid.github.io/" />
-  <meta property="og:type" content="website" />
-
-  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Eczar:wght@400;500;700&amp;family=Playfair+Display:wght@400;700;900&amp;display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="MiixiviD 的音樂、小說與創作入口。">
+  <meta property="og:title" content="MiixiviD｜音樂與文字創作">
+  <meta property="og:description" content="走進 MiixiviD 的音樂、小說與創作世界。">
+  <meta property="og:image" content="cover_2.png">
+  <title>MiixiviD｜音樂與文字創作</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700;900&family=Playfair+Display:wght@600;800&display=swap" rel="stylesheet">
   <style>
-        body { font-family: 'Eczar', serif; }
-        h1, .column-title { font-family: 'Playfair Display', serif; }
-
-        .particle-container {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none; z-index: 9999;
-        }
-        .particle {
-            position: absolute; bottom: -5%;
-            width: 3px; height: 3px; border-radius: 50%;
-            background: #8b0000; opacity: 0.6;
-            animation: rise 8s linear infinite, drift 4s ease-in-out infinite;
-        }
-        @keyframes rise { 0% { bottom: -5%; opacity: 0.6; } 100% { bottom: 105%; opacity: 0; } }
-        @keyframes drift { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(30px); } }
-        .particle:nth-child(1) { left: 5%; animation-delay: 0s; }
-        .particle:nth-child(2) { left: 15%; animation-delay: 2s; width: 2px; height: 2px; }
-        .particle:nth-child(3) { left: 25%; animation-delay: 4s; }
-        .particle:nth-child(4) { left: 35%; animation-delay: 1s; width: 4px; height: 4px; }
-        .particle:nth-child(5) { left: 50%; animation-delay: 3s; }
-        .particle:nth-child(6) { left: 65%; animation-delay: 5s; width: 2px; height: 2px; }
-        .particle:nth-child(7) { left: 75%; animation-delay: 2.5s; }
-        .particle:nth-child(8) { left: 85%; animation-delay: 6s; width: 4px; height: 4px; }
-        .particle:nth-child(9) { left: 92%; animation-delay: 1.5s; }
-
-        .gothic-btn {
-            display: block; text-decoration: none; padding: 12px;
-            margin: 8px 0; border-radius: 24px;
-            border: 1px solid rgba(139, 0, 0, 0.4);
-            background: rgba(20, 0, 0, 0.6);
-            color: #d4c4a8; font-weight: 500; font-size: 0.9rem;
-            transition: all 0.3s ease; text-align: center;
-            font-family: 'Eczar', serif;
-        }
-        .gothic-btn:hover {
-            background: rgba(139, 0, 0, 0.3);
-            border-color: #8b0000;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 20px rgba(139, 0, 0, 0.4);
-        }
-        .col .gothic-btn {
-            border-color: rgba(139, 0, 0, 0.6);
-        }
-        .xivid-col .gothic-btn {
-            border-color: rgba(75, 0, 130, 0.6);
-        }
-        .xivid-col .gothic-btn:hover {
-            background: rgba(75, 0, 130, 0.3);
-            border-color: #4b0082;
-            box-shadow: 0 4px 20px rgba(75, 0, 130, 0.4);
-        }
-        .shared-links .gothic-btn {
-            border-color: rgba(184, 134, 11, 0.5);
-            background: rgba(184, 134, 11, 0.15);
-        }
-        .shared-links .gothic-btn:hover {
-            background: rgba(184, 134, 11, 0.25);
-            border-color: #b8860b;
-            box-shadow: 0 4px 20px rgba(184, 134, 11, 0.3);
-        }
-        .donate-btn {
-            background: linear-gradient(90deg, #8b0000, #4b0082) !important;
-            color: #d4c4a8 !important; border: 1px solid #8b0000 !important;
-            animation: pulse 3s infinite;
-        }
-        .donate-btn:hover {
-            box-shadow: 0 5px 25px rgba(139, 0, 0, 0.6) !important;
-        }
-        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.015); } }
-
-        .profile-img {
-            width: 130px; height: 130px; border-radius: 50%; object-fit: cover;
-            border: 3px solid #8b0000;
-            box-shadow: 0 0 30px rgba(139, 0, 0, 0.5), 0 0 60px rgba(75, 0, 130, 0.2);
-        }
-        .ornament { color: #8b0000; opacity: 0.7; }
-
-        .profile-link {
-        display: block;
-        width: fit-content;
-        margin: 0 auto 1.5rem;
-        line-height: 0;
-        }
-
-        .profile-img {
-        display: block;
-        }
-    </style>
- </head>
-
- <body class="w-full min-h-screen text-center py-10 px-5" style="background: linear-gradient(rgb(10, 10, 10), rgb(26, 10, 10), rgb(13, 13, 26));">
-  <div class="particle-container" aria-hidden="true">
-   <div class="particle"></div>
-   <div class="particle"></div>
-   <div class="particle"></div>
-   <div class="particle"></div>
-   <div class="particle"></div>
-   <div class="particle"></div>
-   <div class="particle"></div>
-   <div class="particle"></div>
-   <div class="particle"></div>
+    :root { --ink:#0b080d; --paper:#e8dfd1; --muted:#aa9b89; --red:#8f1d2c; --violet:#67448c; --gold:#b89859; --line:rgba(232,223,209,.16); }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; min-height:100vh; color:var(--paper); background:radial-gradient(circle at 20% 0%,#29101a 0,transparent 34%),radial-gradient(circle at 90% 25%,#1d122b 0,transparent 35%),var(--ink); font-family:"Noto Serif TC",serif; }
+    button,a { font:inherit; }
+    a { color:inherit; }
+    .hero { position:relative; min-height:390px; display:grid; place-items:center; overflow:hidden; background-image:linear-gradient(180deg,rgba(6,4,8,.25),rgba(11,8,13,.92)),url("cover.png"); background-size:cover; background-position:center; border-bottom:1px solid var(--line); }
+    .hero::after { content:""; position:absolute; inset:0; background:linear-gradient(90deg,rgba(143,29,44,.16),transparent 45%,rgba(103,68,140,.14)); pointer-events:none; }
+    .hero-content { position:relative; z-index:1; text-align:center; padding:64px 24px 108px; text-shadow:0 3px 24px #000; }
+    .sigil { color:var(--gold); font-size:24px; letter-spacing:.4em; }
+    h1 { margin:8px 0 4px; font:800 clamp(48px,9vw,92px)/1 "Playfair Display",serif; letter-spacing:.04em; }
+    .tagline { margin:14px 0 0; color:#d0c2b0; letter-spacing:.12em; }
+    .nav-wrap { position:sticky; z-index:20; top:0; margin-top:-72px; padding:0 18px; }
+    .nav { max-width:980px; margin:auto; display:grid; grid-template-columns:repeat(4,1fr); gap:8px; padding:10px; border:1px solid var(--line); border-radius:18px; background:rgba(14,9,16,.84); box-shadow:0 18px 50px rgba(0,0,0,.35); backdrop-filter:blur(18px); }
+    .nav button { min-height:48px; border:1px solid transparent; border-radius:12px; color:var(--muted); background:transparent; cursor:pointer; transition:.25s ease; }
+    .nav button:hover,.nav button:focus-visible { color:var(--paper); background:rgba(255,255,255,.06); outline:none; }
+    .nav button.active { color:#fff; border-color:rgba(184,152,89,.42); background:linear-gradient(135deg,rgba(143,29,44,.44),rgba(103,68,140,.38)); box-shadow:inset 0 0 20px rgba(255,255,255,.04); }
+    main { max-width:1040px; margin:auto; padding:78px 22px 80px; }
+    .panel { display:none; animation:reveal .45s ease both; }
+    .panel.active { display:block; }
+    @keyframes reveal { from { opacity:0; transform:translateY(12px); } }
+    .eyebrow { color:var(--gold); font-size:13px; letter-spacing:.22em; text-transform:uppercase; }
+    h2 { margin:8px 0 14px; font-size:clamp(32px,5vw,52px); line-height:1.2; }
+    .lead { max-width:720px; color:#bfb2a2; line-height:1.9; }
+    .about { display:grid; grid-template-columns:220px 1fr; gap:42px; align-items:center; }
+    .portrait-link { display:block; width:100%; aspect-ratio:1; border-radius:50%; }
+    .portrait { display:block; width:100%; aspect-ratio:1; object-fit:cover; object-position:center; border-radius:50%; border:2px solid var(--red); box-shadow:0 0 0 9px rgba(143,29,44,.1),0 20px 50px rgba(0,0,0,.35); transition:opacity .18s ease, transform .3s ease, box-shadow .3s ease; }
+    .portrait.changing { opacity:.25; transform:scale(.975); }
+    .member-name { display:inline-block; padding:0 .12em; color:#d8c9b6; border-bottom:1px dotted rgba(184,152,89,.65); cursor:pointer; transition:color .2s ease, text-shadow .2s ease, border-color .2s ease; }
+    .member-name:hover,.member-name:focus-visible,.member-name.active { color:#fff; border-color:var(--gold); text-shadow:0 0 14px rgba(184,152,89,.7); outline:none; }
+    .cards { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; margin-top:34px; }
+    .card { position:relative; min-height:220px; padding:28px; overflow:hidden; border:1px solid var(--line); border-radius:20px; background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018)); }
+    .card::before { content:""; position:absolute; width:150px; height:150px; right:-70px; top:-70px; border-radius:50%; background:var(--accent,var(--red)); filter:blur(20px); opacity:.18; }
+    .number { color:var(--gold); font:600 13px "Playfair Display",serif; letter-spacing:.16em; }
+    h3 { margin:12px 0 9px; font-size:24px; }
+    .card p { color:#aa9e91; line-height:1.75; margin:0 0 24px; }
+    .links { display:flex; flex-wrap:wrap; gap:9px; }
+    .link { display:inline-flex; align-items:center; gap:7px; padding:9px 13px; text-decoration:none; font-size:14px; border:1px solid rgba(184,152,89,.3); border-radius:999px; color:#d8c9b6; transition:.2s ease; }
+    .link:hover,.link:focus-visible { color:#fff; border-color:var(--gold); background:rgba(184,152,89,.1); transform:translateY(-2px); outline:none; }
+    .portal { display:grid; min-height:340px; place-items:center; text-align:center; padding:44px; border:1px solid var(--line); border-radius:24px; background:linear-gradient(135deg,rgba(143,29,44,.2),rgba(103,68,140,.19)); }
+    .portal .link { font-size:16px; padding:14px 22px; }
+    footer { padding:28px 18px 42px; text-align:center; color:#665d5b; font-size:13px; }
+    @media (max-width:700px) { .hero { min-height:340px; } .hero-content { padding-bottom:112px; } .nav { grid-template-columns:repeat(2,1fr); } .nav-wrap { margin-top:-104px; } main { padding-top:92px; } .about { grid-template-columns:1fr; text-align:center; } .portrait { width:170px; margin:auto; } .lead { margin-inline:auto; } .cards { grid-template-columns:1fr; } }
+    @media (prefers-reduced-motion:reduce) { * { scroll-behavior:auto!important; animation:none!important; transition:none!important; } }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-content"><div class="sigil" aria-hidden="true">✦ ☩ ✦</div><h1>MiixiviD</h1><p class="tagline">MUSIC · FICTION · CREATION</p></div>
+  </header>
+  <div class="nav-wrap">
+    <nav class="nav" aria-label="主要內容">
+      <button class="active" data-page="about">關於 MiixiviD</button>
+      <button data-page="music">音樂作品</button>
+      <button data-page="fiction">文字作品</button>
+      <button data-page="links">各平台快速連結</button>
+    </nav>
   </div>
+  <main>
+    <section id="about" class="panel active" aria-labelledby="about-title">
+      <div class="about"><a class="portrait-link" href="https://portaly.cc/MiixiviD" target="_blank" rel="noopener" aria-label="開啟 MiixiviD 的 Portaly 頁面"><img id="about-portrait" class="portrait" src="profile.png" data-default-src="profile.png" alt="MiixiviD 個人照片"></a><div><span class="eyebrow">About the creator</span><h2 id="about-title">關於 MiixiviD</h2><p class="lead">MiixiviD 是一個以世界觀、音樂與故事創作為核心的虛擬創作企劃。<br>
+目前旗下主要包含兩個音樂專案：</p>
 
-  <main class="max-w-lg mx-auto">
-   <a href="https://portaly.cc/MiixiviD" target="_blank" class="profile-link">
-    <img class="profile-img" loading="lazy" src="profile.jpg" alt="MiixiviD Music">
-   </a>
-    
-   <p class="ornament text-2xl mb-1">☩</p>
-   <h1 class="text-4xl font-black tracking-wider mb-2" style="color: rgb(212, 196, 168); font-weight: 900; font-style: normal; font-size: 32px;">MiixiviD</h1>
-   <p class="text-sm mb-8 opacity-80" style="color: rgb(138, 122, 106); font-weight: 400; font-style: normal; font-size: 16px;">🎶 Just enjoy the beats~</p>
+【 MiiD 】<br>
+以歌曲、情境音樂、原聲帶與故事型作品為主。作品中可能出現男聲、女聲、男女混唱或純音樂等多元形式，整體較偏向「虛擬音樂團體／世界觀音樂企劃」。除了音樂之外，MiiD 同時包含長篇小說等相關衍生創作。</p>
 
-   <div class="grid grid-cols-2 gap-4 mb-6">
+【 Xivid 】<br>
+以特定風格純音樂、作品為主，風格相較於 MiiD 更偏向個人化、器樂化與實驗性。</p>
 
-    <div class="col">
-     <div class="text-lg font-bold mb-3 pb-2 border-b border-red-900" style="color: rgb(139, 0, 0); font-weight: 700; font-style: normal; font-size: 16px;">MiiD</div>
-      <a href="https://open.spotify.com/artist/5Rt6DsgbJec4yOqawqIvPc" target="_blank" rel="noopener noreferrer" class="gothic-btn">Spotify</a> 
-      <a href="https://music.apple.com/tw/artist/miid/1826549990" target="_blank" rel="noopener noreferrer" class="gothic-btn">Apple Music</a> 
-      <a href="https://www.kkbox.com/tw/tc/artist/PXTvknGYLmWjh2adnB" target="_blank" rel="noopener noreferrer" class="gothic-btn">KKBOX</a>
-      <a href="https://music-tw.line.me/artist/2475008" target="_blank" rel="noopener noreferrer" class="gothic-btn">Line Music</a>
-      <a href="https://music.youtube.com/channel/UCzwAfi83bklEHP91K2L4CVw" target="_blank" rel="noopener noreferrer" class="gothic-btn">YouTube Music</a>
-      <a href="https://www.youtube.com/@MiiDthenobody" target="_blank" rel="noopener noreferrer" class="gothic-btn">YouTube Channel</a>
-    </div>
+目前發布作品時，會依據作品類型與主題，使用 MiiD、Xivid 或 MiixiviD 名義進行發表。</p>
 
-    <div class="col xivid-col">
-     <div class="text-lg font-bold mb-3 pb-2 border-b border-purple-900" style="color: rgb(75, 0, 130); font-weight: 700; font-style: normal; font-size: 16px;">Xivid</div>
-      <a href="https://open.spotify.com/artist/4sriMJGbNNetzk6h0YS84e" target="_blank" rel="noopener noreferrer" class="gothic-btn">Spotify</a>
-      <a href="https://music.apple.com/tw/artist/xivid/1861511246" target="_blank" rel="noopener noreferrer" class="gothic-btn">Apple Music</a>
-      <a href="https://www.amazon.com/music/player/artists/B0G761W3YZ/xivid" target="_blank" rel="noopener noreferrer" class="gothic-btn">Amazon</a>
-      <a href="https://tidal.com/artist/71442405" target="_blank" rel="noopener noreferrer" class="gothic-btn">TIDAL</a>
-      <a href="https://music.youtube.com/channel/UCn211qTBmlZzL2HbBAFLIKw" target="_blank" rel="noopener noreferrer" class="gothic-btn">YouTube Music</a>
-      <a href="https://www.youtube.com/@xividinthemist" target="_blank" rel="noopener noreferrer" class="gothic-btn">YouTube Channel</a>
-    </div>
+另外，專案中總共有六位成員：<span class="member-name" tabindex="0" role="button" data-name="Milo" data-image="Milo.png">Milo</span>、<span class="member-name" tabindex="0" role="button" data-name="Ines" data-image="Ines.png">Ines</span>、<span class="member-name" tabindex="0" role="button" data-name="Isla" data-image="Isla.png">Isla</span>、<span class="member-name" tabindex="0" role="button" data-name="Xia" data-image="Xia.png">Xia</span>、<span class="member-name" tabindex="0" role="button" data-name="Vivia" data-image="Vivia.png">Vivia</span>、<span class="member-name" tabindex="0" role="button" data-name="Dia" data-image="Dia.png">Dia</span><br>
 
-   </div>
+音樂作品會由這些成員獨自或合作呈現。</p>
 
-   <div class="shared-links">
-    <a href="https://streetvoice.com/miidthenobody" target="_blank" rel="noopener noreferrer" class="gothic-btn">StreetVoice</a>
-    <a href="https://www.facebook.com/MiiDthenobody/" target="_blank" rel="noopener noreferrer" class="gothic-btn">Facebook</a>
-    <a href="https://www.bookwalker.com.tw/search?v=1297" target="_blank" rel="noopener noreferrer" class="gothic-btn">BOOK☆WALKER</a>
-    <a href="https://www.patreon.com/collection/2079548?view=expanded" target="_blank" rel="noopener noreferrer" class="gothic-btn">2026 新手AI音樂製作指南</a>
-    <a href="https://www.patreon.com/MiixiviD/posts/buy-me-coffee-wo-162365147" target="_blank" rel="noopener noreferrer" class="gothic-btn donate-btn">☕ Buy me a coffee</a>
-   </div>
+MiixiviD 的創作過程中，會依作品需求結合 AI 與人工創作工具進行輔助、後製與世界觀延伸創作。其中，小說劇情與世界觀設定皆由人類作者原創撰寫。</p>
+
+目前使用工具包含：<br>
+ChatGPT、Gemini、Grok、Suno、Mozart、Audacity、Reaper、FL Studio、Filmora、NotebookLM、Canva、Excel、Word，以及 MiixiviD Audio Suite（MAS）等。</p>
+
+聯絡信箱： miidthenobody@gmail.com</p>
+</div></div>
+    </section>
+    <section id="music" class="panel" aria-labelledby="music-title">
+      <span class="eyebrow">Discography</span><h2 id="music-title">音樂作品</h2><p class="lead">兩個名字、兩種聲音風景。選擇作品系列，前往慣用的串流平台收聽完整歌曲。</p>
+      <div class="cards">
+        <article class="card"><span class="number">MUSIC 01</span><h3>MiiD</h3><p>以歌曲、情境音樂、原聲帶與故事型作品為主。作品中可能出現男聲、女聲、男女混唱或純音樂等多元形式。</p><div class="links"><a class="link" href="https://open.spotify.com/artist/5Rt6DsgbJec4yOqawqIvPc" target="_blank" rel="noopener">Spotify ↗</a><a class="link" href="https://music.apple.com/tw/artist/miid/1826549990" target="_blank" rel="noopener">Apple Music ↗</a><a class="link" href="https://www.youtube.com/@MiiDthenobody" target="_blank" rel="noopener">YouTube ↗</a></div></article>
+        <article class="card" style="--accent:var(--violet)"><span class="number">MUSIC 02</span><h3>Xivid</h3><p>以特定風格純音樂、作品為主，風格相較於 MiiD 更偏向個人化、器樂化與實驗性。</p><div class="links"><a class="link" href="https://open.spotify.com/artist/4sriMJGbNNetzk6h0YS84e" target="_blank" rel="noopener">Spotify ↗</a><a class="link" href="https://music.apple.com/tw/artist/xivid/1861511246" target="_blank" rel="noopener">Apple Music ↗</a><a class="link" href="https://www.youtube.com/@xividinthemist" target="_blank" rel="noopener">YouTube ↗</a></div></article>
+      </div>
+    </section>
+    <section id="fiction" class="panel" aria-labelledby="fiction-title">
+      <span class="eyebrow">Written works</span><h2 id="fiction-title">文字作品</h2><p class="lead">從音樂以外的入口，走進由文字構築的世界。</p>
+      <div class="cards">
+        <article class="card"><span class="number">E-BOOK</span><h3>小說作品</h3><p>已出版作品與電子書收藏。點擊連結可查看書籍介紹、試閱與購買資訊。</p><div class="links"><a class="link" href="https://www.bookwalker.com.tw/search?v=1297" target="_blank" rel="noopener">BOOK☆WALKER ↗</a></div></article>
+        <article class="card" style="--accent:var(--gold)"><span class="number">經驗分享DPF</span><h3>2026 新手 AI 音樂製作指南</h3><p>為初次踏入 AI 音樂創作的人整理的實作指南，從想法開始建立自己的作品。</p><div class="links"><a class="link" href="https://www.patreon.com/collection/2079548?view=expanded" target="_blank" rel="noopener">閱讀指南 ↗</a></div></article>
+      </div>
+    </section>
+    <section id="links" class="panel" aria-labelledby="links-title">
+      <div class="portal"><div><span class="eyebrow">All platforms</span><h2 id="links-title">各平台快速連結</h2><p class="lead">前往原本的入口網站，一次查看所有音樂平台、社群與支持方式。</p><a class="link" href="0.html">開啟 MiixiviD 入口網站 →</a></div></div>
+    </section>
   </main>
-  <footer class="mt-12 text-xs opacity-50" style="color: rgb(85, 85, 85); font-weight: 400; font-style: normal; font-size: 16px;">© 2026 MiixiviD | All Rights Reserved</footer>
- </html>
+  <footer>© 2026 MiixiviD · All Rights Reserved</footer>
+  <script>
+    const buttons=[...document.querySelectorAll('.nav button')];
+    const panels=[...document.querySelectorAll('.panel')];
+    function showPage(page,updateHash=true){
+      const valid=panels.some(panel=>panel.id===page)?page:'about';
+      buttons.forEach(button=>{const active=button.dataset.page===valid;button.classList.toggle('active',active);button.setAttribute('aria-current',active?'page':'false');});
+      panels.forEach(panel=>panel.classList.toggle('active',panel.id===valid));
+      if(updateHash) history.replaceState(null,'','#'+valid);
+      document.title=`${buttons.find(button=>button.dataset.page===valid).textContent}｜MiixiviD`;
+    }
+    buttons.forEach(button=>button.addEventListener('click',()=>showPage(button.dataset.page)));
+    addEventListener('hashchange',()=>showPage(location.hash.slice(1),false));
+    showPage(location.hash.slice(1)||'about',false);
+
+    const portrait=document.querySelector('#about-portrait');
+    const members=[...document.querySelectorAll('.member-name')];
+    const defaultPortrait=portrait.dataset.defaultSrc;
+    let portraitTimer;
+
+    function setPortrait(src,name){
+      clearTimeout(portraitTimer);
+      const preload=new Image();
+      preload.onload=()=>{
+        portrait.classList.add('changing');
+        portraitTimer=setTimeout(()=>{
+          portrait.src=src;
+          portrait.alt=name?`${name} 角色圖片`:'MiixiviD 個人照片';
+          portrait.classList.remove('changing');
+        },120);
+      };
+      preload.onerror=()=>resetPortrait();
+      preload.src=src;
+      members.forEach(member=>member.classList.toggle('active',member.dataset.name===name));
+    }
+
+    function resetPortrait(){
+      clearTimeout(portraitTimer);
+      portrait.src=defaultPortrait;
+      portrait.alt='MiixiviD 個人照片';
+      portrait.classList.remove('changing');
+      members.forEach(member=>member.classList.remove('active'));
+    }
+
+    members.forEach(member=>{
+      const show=()=>setPortrait(member.dataset.image,member.dataset.name);
+      member.addEventListener('pointerenter',show);
+      member.addEventListener('pointerleave',resetPortrait);
+      member.addEventListener('focus',show);
+      member.addEventListener('blur',resetPortrait);
+      member.addEventListener('click',show);
+      member.addEventListener('keydown',event=>{
+        if(event.key==='Enter'||event.key===' '){ event.preventDefault(); show(); }
+        if(event.key==='Escape'){ member.blur(); resetPortrait(); }
+      });
+    });
+    document.addEventListener('pointerdown',event=>{
+      if(!event.target.closest('.member-name')) resetPortrait();
+    });
+  </script>
+</body>
+</html>
