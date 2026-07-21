@@ -122,7 +122,7 @@
       buttons.forEach(button=>{const active=button.dataset.page===valid;button.classList.toggle('active',active);button.setAttribute('aria-current',active?'page':'false');});
       panels.forEach(panel=>panel.classList.toggle('active',panel.id===valid));
       if(updateHash) history.replaceState(null,'','#'+valid);
-      document.title=`${buttons.find(button=>button.dataset.page===valid).textContent}｜MiixiviD`;
+      document.title=`MiixiviD｜${buttons.find(button=>button.dataset.page===valid).textContent}`;
     }
     buttons.forEach(button=>button.addEventListener('click',()=>showPage(button.dataset.page)));
     addEventListener('hashchange',()=>showPage(location.hash.slice(1),false));
