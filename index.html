@@ -56,6 +56,10 @@
     .cards { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; margin-top:34px; }
     .card { position:relative; min-height:220px; padding:28px; overflow:hidden; border:1px solid var(--line); border-radius:20px; background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018)); }
     .card::before { content:""; position:absolute; width:150px; height:150px; right:-70px; top:-70px; border-radius:50%; background:var(--accent,var(--red)); filter:blur(20px); opacity:.18; }
+    .unknown-card { grid-column:1/-1; min-height:190px; border-color:rgba(184,152,89,.28); background:linear-gradient(135deg,rgba(184,152,89,.07),rgba(103,68,140,.06),rgba(255,255,255,.018)); }
+    .unknown-card::after { content:"UNKNOWN"; position:absolute; right:24px; bottom:-14px; color:rgba(232,223,209,.035); font:800 clamp(56px,10vw,108px)/1 "Playfair Display",serif; letter-spacing:.06em; pointer-events:none; }
+    .project-status { display:inline-flex; align-items:center; gap:8px; margin-top:4px; padding:7px 11px; color:var(--gold); border:1px solid rgba(184,152,89,.28); border-radius:999px; background:rgba(184,152,89,.06); font-size:12px; letter-spacing:.12em; }
+    .project-status::before { content:""; width:6px; height:6px; border-radius:50%; background:var(--gold); box-shadow:0 0 10px rgba(184,152,89,.7); }
     .number { color:var(--gold); font:600 13px "Playfair Display",serif; letter-spacing:.16em; }
     h3 { margin:12px 0 9px; font-size:24px; }
     .card p { color:#aa9e91; line-height:1.75; margin:0 0 24px; }
@@ -76,7 +80,7 @@
     .platform-button:hover,.platform-button:focus-visible { color:#fff; border-color:var(--gold); background:rgba(184,152,89,.12); transform:translateY(-2px); outline:none; box-shadow:0 8px 20px rgba(0,0,0,.22); }
     .platform-button.support { background:linear-gradient(135deg,rgba(143,29,44,.5),rgba(103,68,140,.45)); }
     footer { padding:28px 18px 42px; text-align:center; color:#665d5b; font-size:13px; }
-    @media (max-width:700px) { .hero { min-height:340px; } .hero-content { padding-bottom:112px; } .nav { grid-template-columns:repeat(2,1fr); } .nav-wrap { margin-top:-104px; } main { padding-top:92px; } .update-item { grid-template-columns:1fr; gap:10px; padding:21px; } .about { grid-template-columns:1fr; text-align:center; } .portrait { width:170px; margin:auto; } .lead { margin-inline:auto; } .cards,.platform-columns { grid-template-columns:1fr; } .platform-group.shared { grid-column:auto; } }
+    @media (max-width:700px) { .hero { min-height:340px; } .hero-content { padding-bottom:112px; } .nav { grid-template-columns:repeat(2,1fr); } .nav-wrap { margin-top:-104px; } main { padding-top:92px; } .update-item { grid-template-columns:1fr; gap:10px; padding:21px; } .about { grid-template-columns:1fr; text-align:center; } .portrait { width:170px; margin:auto; } .lead { margin-inline:auto; } .cards,.platform-columns { grid-template-columns:1fr; } .unknown-card,.platform-group.shared { grid-column:auto; } }
     @media (max-width:440px) { .platform-links { grid-template-columns:1fr; } }
     @media (prefers-reduced-motion:reduce) { * { scroll-behavior:auto!important; animation:none!important; transition:none!important; } }
   </style>
@@ -149,7 +153,7 @@
     </section>
 
     <section id="music" class="panel" aria-labelledby="music-title">
-      <span class="eyebrow">Discography</span><h2 id="music-title">音樂作品</h2><p class="lead">兩個名字、兩種聲音風景。選擇作品系列，前往慣用的串流平台收聽完整歌曲。</p>
+      <span class="eyebrow">Discography</span><h2 id="music-title">音樂作品</h2><p class="lead">不同名字、不同聲音風景。選擇作品系列，前往慣用的串流平台收聽完整歌曲。</p>
       <div class="cards">
         <article class="card"><span class="number">.--. .-. --- .--- . -.-. -  /  -- .. .. -..</span>
           <h3>MiiD</h3><p>以歌曲、情境音樂、原聲帶與故事型作品為主。作品中可能出現男聲、女聲、男女混唱或純音樂等多元形式。</p>
@@ -163,6 +167,19 @@
             <div class="links"><a class="link" href="https://open.spotify.com/artist/4sriMJGbNNetzk6h0YS84e" target="_blank" rel="noopener">Spotify ↗</a>
               <a class="link" href="https://music.apple.com/tw/artist/xivid/1861511246" target="_blank" rel="noopener">Apple Music ↗</a>
               <a class="link" href="https://music.youtube.com/channel/UCn211qTBmlZzL2HbBAFLIKw" target="_blank" rel="noopener">YouTube Music ↗</a>
+            </div>
+        </article>
+        <article class="card unknown-card" style="--accent:var(--gold)"><span class="number">.--. .-. --- .--- . -.-. -  /  ..- -. -.- -. --- .-- -.</span>
+          <h3>Project Unknown - Xivid × MiiD</h3>
+          <p>這是一個融合 AI 音樂、概念專輯、ARG、多平台互動與創作理念的實驗性企劃，同時也是一張原創遊戲原聲帶。<br>
+                它的價值因人而異，我將它送給所有人。<br>
+                若你願意踏上這段旅程，答案或許正在某個不起眼的地方等待著你；若你成功抵達終點，歡迎在對應頁面留下你的名字。
+          </p>
+            <div class="links"><a class="link" href="https://youtu.be/Nn-_ZQN4QV4" target="_blank" rel="noopener">YouTube ↗</a>
+              <a class="link" href="https://streetvoice.com/miidthenobody/songs/album/97325418/" target="_blank" rel="noopener">StreetVoice ↗</a>
+              <a class="link" href="https://open.spotify.com/playlist/5SMTa8YoQPYN35taREytIk" target="_blank" rel="noopener">Spotify ↗</a>
+              <a class="link" href="https://music.youtube.com/playlist?list=PLb3cNqrFVIH4&si=q2eprdgl5Xn6klHB" target="_blank" rel="noopener">YouTube Music ↗</a>
+              <a class="link" href="https://www.patreon.com/MiixiviD/posts/arg-project-x-162364770?collection=2242655" target="_blank" rel="noopener">Patreon ↗</a>
             </div>
         </article>
       </div>
